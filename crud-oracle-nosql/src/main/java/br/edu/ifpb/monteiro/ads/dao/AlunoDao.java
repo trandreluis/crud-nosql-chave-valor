@@ -1,32 +1,29 @@
 package br.edu.ifpb.monteiro.ads.dao;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import br.edu.ifpb.monteiro.ads.model.Aluno;
+import json.ConverteJson;
 import oracle.kv.Key;
 import oracle.kv.Value;
 import oracle.kv.ValueVersion;
 
 public class AlunoDao extends GenericDao<Aluno, Long> {
 
-	private Gson gson = new Gson();
-
 	@Override
 	void salvar(Aluno dado) {
 		// TODO Auto-generated method stub
 
 		store.put(Key.createKey(Long.toString(dado.getMatricula())), 
-				Value.createValue(gson.toJson(dado).getBytes()));
-		
+				Value.createValue(ConverteJson.convertToJson(dado).getBytes()));
+
 	}
 
 	@Override
 	void atualizar(Aluno dado) {
 		// TODO Auto-generated method stub
 
-		store.putIfPresent(Key.createKey(Long.toString(dado.getMatricula())), 
-				Value.createValue(gson.toJson(dado).getBytes()));
+		store.putIfPresent(Key.createKey(Long.toString(dado.getMatricula())),
+				Value.createValue(ConverteJson.convertToJson(dado).getBytes()));
 
 	}
 
@@ -42,13 +39,11 @@ public class AlunoDao extends GenericDao<Aluno, Long> {
 	Aluno buscar(Long dado) {
 		// TODO Auto-generated method stub
 
-		final	ValueVersion valueVersion = store.get(Key.createKey(Long.toString(dado)));
+		final ValueVersion valueVersion = store.get(Key.createKey(Long.toString(dado)));
 
-		gson.toJson(valueVersion.getValue().getValue());
-		
+		return ConverteJson.convertToAluno(ConverteJson.convertToJson
+				(valueVersion.getValue().getValue()));
 
-
-		return null;
 	}
 
 }

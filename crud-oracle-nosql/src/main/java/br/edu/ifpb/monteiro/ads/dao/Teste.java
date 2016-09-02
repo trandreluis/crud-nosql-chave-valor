@@ -75,99 +75,105 @@ import oracle.kv.ValueVersion;
  */
 public class Teste {
 
-    private final KVStore store;
+	private final KVStore store;
 
-    /**
-     * Runs the HelloBigDataWorld command line program.
-     */
-    public static void main(String args[]) {
-        try {
-            Teste example = new Teste(args);
-            example.runExample();
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-        }
-    }
+	/**
+	 * Runs the HelloBigDataWorld command line program.
+	 */
+	public static void main(String args[]) {
+		try {
+			Teste example = new Teste(args);
+			example.runExample();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		}
+	}
 
-    /**
-     * Parses command line args and opens the KVStore.
-     */
-    Teste(String[] argv) {
+	/**
+	 * Parses command line args and opens the KVStore.
+	 */
+	Teste(String[] argv) {
 
-        String storeName = "kvstore";
-        String hostName = "localhost";
-        String hostPort = "5000";
+		String storeName = "kvstore";
+		String hostName = "localhost";
+		String hostPort = "5000";
 
-//        final int nArgs = argv.length;
-//        int argc = 0;
+		//        final int nArgs = argv.length;
+		//        int argc = 0;
 
-//        while (argc < nArgs) {
-//            final String thisArg = argv[argc++];
-//
-//            if (thisArg.equals("-store")) {
-//                if (argc < nArgs) {
-//                    storeName = argv[argc++];
-//                } else {
-//                    usage("-store requires an argument");
-//                }
-//            } else if (thisArg.equals("-host")) {
-//                if (argc < nArgs) {
-//                    hostName = argv[argc++];
-//                } else {
-//                    usage("-host requires an argument");
-//                }
-//            } else if (thisArg.equals("-port")) {
-//                if (argc < nArgs) {
-//                    hostPort = argv[argc++];
-//                } else {
-//                    usage("-port requires an argument");
-//                }
-//            } else {
-//                usage("Unknown argument: " + thisArg);
-//            }
-//        }
+		//        while (argc < nArgs) {
+		//            final String thisArg = argv[argc++];
+		//
+		//            if (thisArg.equals("-store")) {
+		//                if (argc < nArgs) {
+		//                    storeName = argv[argc++];
+		//                } else {
+		//                    usage("-store requires an argument");
+		//                }
+		//            } else if (thisArg.equals("-host")) {
+		//                if (argc < nArgs) {
+		//                    hostName = argv[argc++];
+		//                } else {
+		//                    usage("-host requires an argument");
+		//                }
+		//            } else if (thisArg.equals("-port")) {
+		//                if (argc < nArgs) {
+		//                    hostPort = argv[argc++];
+		//                } else {
+		//                    usage("-port requires an argument");
+		//                }
+		//            } else {
+		//                usage("Unknown argument: " + thisArg);
+		//            }
+		//        }
 
-        store = KVStoreFactory.getStore
-            (new KVStoreConfig(storeName, hostName + ":" + hostPort));
-    }
+		store = KVStoreFactory.getStore
+				(new KVStoreConfig(storeName, hostName + ":" + hostPort));
+	}
 
-//    private void usage(String message) {
-//        System.out.println("\n" + message + "\n");
-//        System.out.println("usage: " + getClass().getName());
-//        System.out.println("\t-store <instance name> (default: kvstore) " +
-//                           "-host <host name> (default: localhost) " +
-//                           "-port <port number> (default: 5000)");
-//        System.exit(1);
-//    }
+	//    private void usage(String message) {
+	//        System.out.println("\n" + message + "\n");
+	//        System.out.println("usage: " + getClass().getName());
+	//        System.out.println("\t-store <instance name> (default: kvstore) " +
+	//                           "-host <host name> (default: localhost) " +
+	//                           "-port <port number> (default: 5000)");
+	//        System.exit(1);
+	//    }
 
-    /**
-     * Performs example operations and closes the KVStore.
-     */
-    void runExample() {
+	/**
+	 * Performs example operations and closes the KVStore.
+	 */
+	void runExample() {
 
-        final String keyString = "Hello";
-        final String keyString2 = "Hello2";
-        final String keyString1 = "Hello3";
-        final String valueString = "Big Data World!";
-//        final String valueString2 = "Big Data World!22";
-//
-//        
-        Gson g = new Gson();
-        
-        store.put(Key.createKey(keyString1),
-                Value.createValue(g.toJson(valueString).getBytes()));
-//        store.put(Key.createKey(keyString2),
-//                Value.createValue(valueString2.getBytes()));
-        final ValueVersion valueVersion = store.get(Key.createKey(keyString));
-        final ValueVersion valueVersion1 = store.get(Key.createKey(keyString1));
+		final String keyString = "Hello";
+		final String keyString2 = "Hello2";
+		final String keyString1 = "Hello3";
+		final String valueString = "Patrick!";
+		final String valueString1 = "emerson!";
+		final String valueString2 = "andré!";
+		//        final String valueString2 = "Big Data World!22";
+		//
+		//        
+		Gson g = new Gson();
 
-        System.out.println(keyString + " " +
-                new String(valueVersion.getValue().getValue()));
-//        System.out.println(keyString2 + " " +
-//                new String(valueVersion2.getValue().getValue()));
-        System.out.println(keyString1 + " " +
-                new String(valueVersion1.getValue().getValue()));
+		store.put(Key.createKey(keyString),
+				Value.createValue(g.toJson(valueString).getBytes()));
+		store.put(Key.createKey(keyString1),
+				Value.createValue(g.toJson(valueString1).getBytes()));
+		store.put(Key.createKey(keyString2),
+				Value.createValue(g.toJson(valueString2).getBytes()));
+	
+		final ValueVersion valueVersion = store.get(Key.createKey(keyString));
+		final ValueVersion valueVersion1 = store.get(Key.createKey(keyString1));
+		final ValueVersion valueVersion2 = store.get(Key.createKey(keyString1));
 
-        store.close();
-    }
+		System.out.println(keyString + " " +
+				new String(valueVersion.getValue().getValue()));
+		System.out.println(keyString1 + " " +
+				new String(valueVersion1.getValue().getValue()));
+		System.out.println(keyString2 + " " +
+				new String(valueVersion2.getValue().getValue()));
+
+		store.close();
+	}
 }
