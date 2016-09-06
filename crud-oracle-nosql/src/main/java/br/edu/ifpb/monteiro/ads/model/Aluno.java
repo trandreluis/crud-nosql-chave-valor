@@ -2,32 +2,41 @@ package br.edu.ifpb.monteiro.ads.model;
 
 public class Aluno {
 
-	private long matricula;
-	private String nome, curso;
-
-	public long getMatricula() {
-		String str = Long.toString(matricula);
-		return matricula;
-	}
-
-	public void setMatricula(long matricula) {
-		this.matricula = matricula;
-	}
-
+	private String nome;
+	private String matricula;
+	private String curso;
+	private String cpf;
+	private String telefone;
+	
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	public String getMatricula() {
+		return matricula;
+	}
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
 	public String getCurso() {
 		return curso;
 	}
-
 	public void setCurso(String curso) {
 		this.curso = curso;
+	}
+	public String getCpf() {
+		return cpf;
+	}
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+	public String getTelefone() {
+		return telefone;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 	public String toString() {
@@ -42,10 +51,14 @@ public class Aluno {
 		if (getClass() != obj.getClass())
 			return false;
 		Aluno other = (Aluno) obj;
-		if (matricula != other.matricula)
+		if (matricula == null) {
+			if (other.matricula != null)
+				return false;
+		} else if (!matricula.equals(other.matricula))
 			return false;
 		return true;
 	}
+
 
 	
 	
