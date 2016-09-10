@@ -14,22 +14,15 @@ public class ConexaoOracle {
     
     
     public static void openStore(){
-    	
     	store = KVStoreFactory.getStore
  	            (new KVStoreConfig(storeName, hostName + ":" + hostPort));
-    	
     }
     
     public static void closeStore(){
-    	
     	store.close();
-    	
     }
 
 	public static KVStore getStore() {
 		return store;
 	}
-    
-    
-
 }

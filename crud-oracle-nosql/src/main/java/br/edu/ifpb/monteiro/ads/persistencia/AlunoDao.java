@@ -3,10 +3,9 @@ package br.edu.ifpb.monteiro.ads.persistencia;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.Gson;
 
-import br.edu.ifpb.monteiro.ads.excecoes.AlunoInexistenteException;
 import br.edu.ifpb.monteiro.ads.excecoes.CrudException;
+import br.edu.ifpb.monteiro.ads.excecoes.MatriculaDuplicadaException;
 import br.edu.ifpb.monteiro.ads.excecoes.NaoExisteDadosException;
 import br.edu.ifpb.monteiro.ads.json.ConverteJson;
 import br.edu.ifpb.monteiro.ads.model.Aluno;
@@ -45,7 +44,7 @@ public class AlunoDao extends GenericDao<Aluno, String> {
 		validar.validarDado(dado);
 
 		if(verificarExistencia(dado.getMatricula())){
-			throw new AlunoInexistenteException();
+			throw new MatriculaDuplicadaException();
 		}else{
 
 			ConexaoOracle.openStore();

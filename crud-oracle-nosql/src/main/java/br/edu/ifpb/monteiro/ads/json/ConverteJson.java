@@ -19,9 +19,7 @@ public class ConverteJson {
 	public static Aluno convertToAluno(String json) {
 		Aluno a = new Aluno();
 		a =  new Gson().fromJson(json, Aluno.class);
-//		System.out.println(a);
 		return a;
-
 	}
 	
 	public static void main(String[] args) {
